@@ -41,7 +41,7 @@ fi
 #----------------------build stuff here
 
 echo "======= START OF BUILD ======="
-make "${MAKE_ARGS[@]}" rosemary_defconfig
+make "${MAKE_ARGS[@]}" k62v1_64_mex_a32_defconfig
 
 sed -i "s/${local_version_str}/${local_version_date_str}/g" out/.config
 
