@@ -6,10 +6,10 @@ echo "CCACHE_DIR: [$CCACHE_DIR]"
 
 MAKE_ARGS=(
     O=out
-    "CC=ccache gcc"
-    "CXX=ccache gcc"
-    CROSS_COMPILE=arm-linux-gnueabi-
-    CROSS_COMPILE_ARM32=arm-linux-gnueabi-
+    "CC=ccache clang"
+    "CXX=ccache clang"
+    CROSS_COMPILE=aarch64-linux-gnu-
+    CROSS_COMPILE_ARM32=aarch64-linux-gnu-
 	ARCH=arm64
 	SUBARCH=arm64
 )
