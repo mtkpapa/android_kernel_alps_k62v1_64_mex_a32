@@ -12,6 +12,12 @@ MAKE_ARGS=(
     CROSS_COMPILE_ARM32=aarch64-linux-gnu-
 	ARCH=arm64
 	SUBARCH=arm64
+	AR=llvm-ar
+    NM=llvm-nm
+    OBJDUMP=llvm-objdump
+    STRIP=llvm-strip
+	LLVM=1
+    LLVM_IAS=1
 )
 
 local_version_str="-perf"
