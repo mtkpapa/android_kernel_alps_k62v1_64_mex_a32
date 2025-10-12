@@ -20,8 +20,8 @@ MAKE_ARGS=(
     LLVM_IAS=0
 )
 
-local_version_str="-perf"
-local_version_date_str="-OverHeat-Next-$(date +%Y%m%d)"
+#local_version_str="-perf"
+#local_version_date_str="-OverHeat-Next-$(date +%Y%m%d)"
 
 KSU_ZIP_STR=noksu
 if [ "$2" == "ksu" ]; then
@@ -49,7 +49,7 @@ fi
 echo "======= START OF BUILD ======="
 make "${MAKE_ARGS[@]}" k62v1_64_mex_a32_defconfig
 
-sed -i "s/${local_version_str}/${local_version_date_str}/g" out/.config
+#sed -i "s/${local_version_str}/${local_version_date_str}/g" out/.config
 
 if [ $KSU_E -eq 1 ]; then
     scripts/config --file out/.config -e KSU \
