@@ -17,7 +17,7 @@ MAKE_ARGS=(
     OBJDUMP=llvm-objdump
     STRIP=llvm-strip
 	LLVM=1
-    LLVM_IAS=1
+    LLVM_IAS=0
 )
 
 local_version_str="-perf"
