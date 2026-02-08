@@ -1,4 +1,5 @@
 BUILD_DATE=$(date "+%Y%m%d-%H%M")
+set -e
 
 MAKE_ARGS=(
     O=out
