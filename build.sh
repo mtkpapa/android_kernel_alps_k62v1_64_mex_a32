@@ -2,8 +2,8 @@ BUILD_DATE=$(date "+%Y%m%d-%H%M")
 
 MAKE_ARGS=(
     O=out
-    CROSS_COMPILE=aarch64-linux-android-
-    CROSS_COMPILE_ARM32=aarch64-linux-android-
+    CROSS_COMPILE=aarch64-linux-gnu-
+    CROSS_COMPILE_ARM32=aarch64-linux-gnu-
 	ARCH=arm64
 	SUBARCH=arm64
 )
