@@ -36,57 +36,10 @@ endif
     $(MODULE_NAME)-objs += common/connectivity_build_in_adapter.o
     $(MODULE_NAME)-objs += common/wmt_build_in_adapter.o
 
-
     # Do build-in for Makefile checking
     export CONFIG_WLAN_DRV_BUILD_IN=y
 
     ifeq ($(CONFIG_WLAN_DRV_BUILD_IN),y)
-        PATH_TO_WMT_DRV      = vendor/mediatek/kernel_modules/connectivity/common
-        PATH_TO_WLAN_CHR_DRV = vendor/mediatek/kernel_modules/connectivity/wlan/adaptor
-        PATH_TO_WLAN_DRV     = vendor/mediatek/kernel_modules/connectivity/wlan/core/gen4m
-        PATH_TO_BT_DRV       = vendor/mediatek/kernel_modules/connectivity/bt/mt66xx/legacy
-        PATH_TO_FM_DRV       = vendor/mediatek/kernel_modules/connectivity/fmradio
-        PATH_TO_GPS_DRV      = vendor/mediatek/kernel_modules/connectivity/gps
-
-        ABS_PATH_TO_WMT_DRV      = $(srctree)/../$(PATH_TO_WMT_DRV)
-        ABS_PATH_TO_WLAN_CHR_DRV = $(srctree)/../$(PATH_TO_WLAN_CHR_DRV)
-        ABS_PATH_TO_WLAN_DRV     = $(srctree)/../$(PATH_TO_WLAN_DRV)
-        ABS_PATH_TO_BT_DRV       = $(srctree)/../$(PATH_TO_BT_DRV)
-        ABS_PATH_TO_FM_DRV       = $(srctree)/../$(PATH_TO_FM_DRV)
-        ABS_PATH_TO_GPS_DRV      = $(srctree)/../$(PATH_TO_GPS_DRV)
-
-        # check wlan driver folder
-        ifeq (,$(wildcard $(ABS_PATH_TO_WMT_DRV)))
-            $(error $(ABS_PATH_TO_WMT_DRV) is not existed)
-        endif
-        ifeq (,$(wildcard $(ABS_PATH_TO_WLAN_CHR_DRV)))
-            $(error $(ABS_PATH_TO_WLAN_CHR_DRV) is not existed)
-        endif
-        ifeq (,$(wildcard $(ABS_PATH_TO_WLAN_DRV)))
-            $(error $(ABS_PATH_TO_WLAN_DRV) is not existed)
-        endif
-
-        $(warning symbolic link to $(PATH_TO_WMT_DRV))
-        $(warning symbolic link to $(PATH_TO_WLAN_CHR_DRV))
-        $(warning symbolic link to $(PATH_TO_WLAN_DRV))
-        $(warning symbolic link to $(PATH_TO_BT_DRV))
-        $(warning symbolic link to $(PATH_TO_FM_DRV))
-        $(warning symbolic link to $(PATH_TO_GPS_DRV))
-
-        $(shell unlink $(srctree)/$(src)/wmt_drv)
-        $(shell unlink $(srctree)/$(src)/wmt_chrdev_wifi)
-        $(shell unlink $(srctree)/$(src)/wlan_drv_gen4m)
-        $(shell unlink $(srctree)/$(src)/bt)
-        $(shell unlink $(srctree)/$(src)/fm)
-        $(shell unlink $(srctree)/$(src)/gps)
-
-        $(shell ln -s $(ABS_PATH_TO_WMT_DRV)      $(srctree)/$(src)/wmt_drv)
-        $(shell ln -s $(ABS_PATH_TO_WLAN_CHR_DRV) $(srctree)/$(src)/wmt_chrdev_wifi)
-        $(shell ln -s $(ABS_PATH_TO_WLAN_DRV)     $(srctree)/$(src)/wlan_drv_gen4m)
-        $(shell ln -s $(ABS_PATH_TO_BT_DRV)       $(srctree)/$(src)/bt)
-        $(shell ln -s $(ABS_PATH_TO_FM_DRV)       $(srctree)/$(src)/fm)
-        $(shell ln -s $(ABS_PATH_TO_GPS_DRV)      $(srctree)/$(src)/gps)
-
         # for gen4m options
         export CONFIG_MTK_COMBO_WIFI_HIF=axi
         export MTK_COMBO_CHIP=CONNAC
@@ -97,12 +50,12 @@ endif
         subdir-ccflags-y += -D MTK_WCN_REMOVE_KERNEL_MODULE
         subdir-ccflags-y += -D MTK_WCN_BUILT_IN_DRIVER
         #subdir-ccflags-y += -Who-error
-        obj-y += wmt_drv/
-        obj-y += wmt_chrdev_wifi/
-        obj-y += wlan_drv_gen4m/
-        obj-y += bt/
-        obj-y += fm/
-        obj-y += gps/
+        obj-$(CONFIG_MTK_COMBO) += common/
+        obj-$(CONFIG_MTK_COMBO_WIFI) += wlan/adaptor/
+        obj-$(CONFIG_MTK_COMBO_CHIP_CONSYS_6765) += wlan/core/gen4m/
+        obj-$(CONFIG_MTK_COMBO_BT) += bt/
+        obj-$(CONFIG_MTK_COMBO_GPS) += gps/
+        obj-$(CONFIG_MTK_FMRADIO) += fm/
     endif
 
 # Otherwise we were called directly from the command line;
